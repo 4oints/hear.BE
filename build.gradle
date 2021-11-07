@@ -50,10 +50,13 @@ dependencies {
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4')
 
     //feign
-    compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+    implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
 
     //modelMapper
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+
+    //thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
     //xss
     implementation group: 'com.navercorp.lucy', name: 'lucy-xss-servlet', version: '2.0.0'

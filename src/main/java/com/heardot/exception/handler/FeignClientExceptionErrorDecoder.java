@@ -1,7 +1,9 @@
-/*
 package com.heardot.exception.handler;
 
 import com.heardot.exception.FeignClientException;
+import feign.Response;
+import feign.codec.ErrorDecoder;
+import feign.codec.StringDecoder;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -17,4 +19,4 @@ public class FeignClientExceptionErrorDecoder implements ErrorDecoder {
     }
 
 }
-*/
+
