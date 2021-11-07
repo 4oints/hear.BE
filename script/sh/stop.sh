@@ -26,7 +26,7 @@ else
   fi
 
   # 도커 이미지 pull
-  sudo docker pull dbfgml741/sloth
+  sudo docker pull ehdqls4013/heardot
 
   #미사용 도커 이미지 삭제
   sudo docker image prune -f

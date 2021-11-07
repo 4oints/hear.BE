@@ -147,7 +147,7 @@ public class TokenProvider {
     public static String getMemberEmail(String token) {
         String email;
         try {
-            Claims claims = Jwts.parser().setSigningKey("hear-backend")  //jwt 만들 때 사용했던 키. static 메서드 사용하기 위해서 String으로 하드 코딩.
+            Claims claims = Jwts.parser().setSigningKey("heardot-backend")  //jwt 만들 때 사용했던 키. static 메서드 사용하기 위해서 String으로 하드 코딩.
                     .parseClaimsJws(token).getBody();
             email = claims.getAudience();
         } catch (Exception e){

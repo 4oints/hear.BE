@@ -18,7 +18,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     properties:
       hibernate:
         format_sql : true
@@ -67,7 +67,7 @@ jasypt:
     bean: encryptorBean
 
 token:
-  secret: sloth-backend
+  secret: heardot-backend
   access-token-expiration-time: 900000  # 15분
   refresh-token-expiration-time: 1210500000 # 2주
 
