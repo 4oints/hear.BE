@@ -1,20 +1,18 @@
 package com.heardot.domain.music;
 
+import com.heardot.domain.BaseEntity;
+import com.heardot.domain.dot.Dot;
 import com.heardot.domain.music.constant.SiteType;
-import com.heardot.domain.posting.Posting;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "music")
 @Getter
-@ToString(exclude = "posting")
+@ToString(exclude = "dot")
 @AllArgsConstructor @NoArgsConstructor
-public class Music {
+public class Music extends BaseEntity {
 
     @Id
     @Column(name = "music_id")
@@ -35,6 +33,22 @@ public class Music {
     @Column(nullable = false)
     private String albumArt;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Posting posting;
+    @OneToOne(fetch = FetchType.LAZY , mappedBy = "music")
+    private Dot dot;
+
+    @Builder
+    public Music(String musicName, String musicUrl, String siteType, String albumArt) {
+        this.musicName = musicName;
+        this.musicUrl = musicUrl;
+        this.siteType = SiteType.from(siteType);
+        this.albumArt = albumArt;
+    }
+
+
+    public void update(String musicName, String musicUrl, String siteType, String albumArt) {
+        this.musicUrl = musicUrl;
+        this.musicName = musicName;
+        this.siteType = SiteType.from(siteType);
+        this.albumArt = albumArt;
+    }
 }

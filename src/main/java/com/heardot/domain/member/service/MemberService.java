@@ -66,4 +66,5 @@ public class MemberService {
             throw new InvalidParameterException("회원 정보가 옳지 않습니다.");
         }
     }
+
 }
