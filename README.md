@@ -1,2 +1,2 @@
 # hear.BE
-BackEnd for hear.
+hear. 백엔드
