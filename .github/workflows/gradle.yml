@@ -67,18 +67,6 @@ jobs:
         docker tag $REPO:latest ${{env.NAME}}/${{env.REPO}}:latest
         docker push ${{env.NAME}}/${{env.REPO}}:latest      
         
-    - name: action-slack
-      uses: 8398a7/action-slack@v3
-      with:
-        status: ${{ job.status }}
-        author_name: heardot Backend - dev
-        fields: repo,commit,message,author # action,eventName,ref,workflow,job,took 추가할 수 있음
-        mention: here
-        if_mention: failure,cancelled
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_DEPLOY }} # required
-      if: always() # Pick up events even if the job fails or is canceled.
-
   deploy:
     needs: build
     name: Deploy
