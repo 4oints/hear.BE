@@ -1,6 +1,5 @@
 package com.heardot.api.dot.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.heardot.api.dot.dto.CreateDotDto;
 import com.heardot.api.dot.dto.UpdateDotDto;
 import com.heardot.domain.dot.Dot;
@@ -25,52 +24,39 @@ public class DotService {
 
 
     public long createDot(Member member, CreateDotDto.Request request) {
-        Dot dot = new Dot(request.getLatitude(), request.getLongitude(),
-                request.getRegionNickname(), request.getComment(),
-                request.getMusicUrl(), request.getMusicName(), request.getSiteType(), request.getAlbumArt(),
-                member);
+        Dot dot = new Dot(request, member);
         Dot savedDot = dotRepository.save(dot);
         return savedDot.getDotId();
     }
 
     public Long update(Member member, UpdateDotDto.Request request) {
-        Dot dotWithMusic = checkOwnerWithMusic(member, request.getDotId());
+        Dot foundDot = checkOwner(member, request.getDotId());
         if (StringUtils.isNotEmpty(request.getComment())) {
-            dotWithMusic.updateComment(request.getComment());
+            foundDot.updateComment(request.getComment());
         }
         if (StringUtils.isNotEmpty(request.getRegionNickname())) {
-            dotWithMusic.updateRegionNickname(request.getRegionNickname());
+            foundDot.updateRegionNickname(request.getRegionNickname());
         }
-        if (!StringUtils.isAnyEmpty(request.getMusicName(), request.getMusicUrl(), request.getSiteType(), request.getAlbumArt())) {
-            dotWithMusic.getMusic().update(request.getMusicName(), request.getMusicUrl(), request.getSiteType(), request.getAlbumArt());
-        }
-        return dotWithMusic.getDotId();
+        return foundDot.getDotId();
     }
 
     private Dot checkOwner(Member member, Long dotId) {
         Dot dot = findWithMemberById(dotId);
         if (!dot.isOwner(member)) {
-            throw new ForbiddenException("해당 닷에 대한 소유권이 없습니다.");
+            throw new ForbiddenException("해당 닷에 대한 병견 권한이 없습니다.");
         }
         return dot;
     }
 
-    private Dot checkOwnerWithMusic(Member member, Long dotId) {
-        Dot dot = findWithMemberMusicById(dotId);
-        if (!dot.isOwner(member)) {
-            throw new ForbiddenException("해당 닷에 대한 소유권이 없습니다.");
-        }
-        return dot;
-    }
     public Dot findById(Long dotId) {
         return dotRepository.findById(dotId).orElseThrow(() -> new EntityNotFoundException(dotId));
     }
 
     public Dot findWithMemberById(Long dotId) {
-        return dotRepository.findWithMemberById(dotId).orElseThrow(() -> new EntityNotFoundException(dotId));
+        return dotRepository.findWithMemberByDotId(dotId).orElseThrow(() -> new EntityNotFoundException(dotId));
     }
 
     public Dot findWithMemberMusicById(Long dotId) {
-        return dotRepository.findWithMemberMusicById(dotId).orElseThrow(() -> new EntityNotFoundException(dotId));
+        return dotRepository.findWithMemberMusicByDotId(dotId).orElseThrow(() -> new EntityNotFoundException(dotId));
     }
 }

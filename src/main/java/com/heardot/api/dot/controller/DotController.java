@@ -33,13 +33,13 @@ public class DotController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    @PostMapping(value = "/dot", headers = { "Content-type=application/json" }, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/dot", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CreateDotDto.Response> createDot(@CurrentMember Member member, @RequestBody CreateDotDto.Request request){
-        if (StringUtils.isAnyBlank(request.getLatitude(), request.getLongitude())) {
-            throw new InvalidParameterException("장소 정보가 없습니다.");
+        if (StringUtils.isAnyBlank(request.getLatitude(), request.getLongitude(), request.getRegionNickname())) {
+            throw new InvalidParameterException("장소 정보가 부족합니다.");
         }
         if (StringUtils.isAnyBlank(request.getMusicUrl(), request.getAlbumArt(), request.getMusicName())) {
-            throw new InvalidParameterException("노래 정보가 없습니다.");
+            throw new InvalidParameterException("노래 정보가 부족합니다.");
         }
         if (!SiteType.isSiteType(request.getSiteType())) {
             throw new InvalidParameterException("지원하지 않는 사이트입니다.");

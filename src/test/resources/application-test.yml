@@ -6,11 +6,9 @@ spring:
     password:
     driver-class-name: org.h2.Driver
 
-  #datasource:
-  #  url: ENC(+xEBcLJcIQUu1KPlkOV3ZkZsbTbSRcswo8v2kEeebq5hxsm5sI93FdOJyEPTfynBO4y3N91npxzf/4/e/84aoQ==)
-  #  username: ENC(Xxf0CNe4vW5dZ0Ti6Myo1c0squM74SKwZtvrO7xnE70=)
-  #  password: ENC(FQKtU2korcZIi2hqlmGRHPBFKLTE9Zd6HFVg0LSbehg=)
-  #  driver-class-name: org.postgresql.Driver
+  h2:
+    console:
+      enabled: true
 
   session:
     jdbc:
@@ -18,31 +16,36 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         format_sql : true
-        default_batch_fetch_size: 1000
-        use_sql_comments: true
-        open-in-view: false
-
+        default_batch_fetch_size: 100
+  #    open-in-view: false
   devtools:
     livereload:
       enabled: true
     restart:
       enabled: true
 
+  thymeleaf:
+    enabled: true
+    encoding: UTF-8
+
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
 
-  h2:
-    console:
-      enabled: true
 
   messages:
     basename: messages,errors
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      platform: h2
+      data-locations: classpath:data.sql
 
 logging:
   level:
@@ -52,6 +55,8 @@ logging:
 
 server:
   servlet:
+    encoding:
+      force-response: true # 에러 메세지 한글 인코딩
     context-path: /
   error:
     include-stacktrace: never
@@ -68,8 +73,9 @@ jasypt:
 
 token:
   secret: heardot-backend
-  access-token-expiration-time: 900000  # 15분
-  refresh-token-expiration-time: 1210500000 # 2주
+  access-token-expiration-time: 9999999999999
+  refresh-token-expiration-time: 9999999999999
+
 
 my-pass: heardot*
 

@@ -8,7 +8,9 @@ import java.time.LocalDate;
 
 public class CreateDotDto {
 
-    @Getter @Setter
+    @Getter
+    @Setter
+    @NoArgsConstructor @AllArgsConstructor
     @ApiModel(value = "Dot 생성 요청 객체", description = "Dot 생성 요청 객체")
     public static class Request {
 
@@ -33,11 +35,9 @@ public class CreateDotDto {
         @ApiModelProperty(value = "위치 별명")
         private String regionNickname;
 
-        @ApiModelProperty(value = "저장한 날짜")
-        private LocalDate regDate;
-
         @ApiModelProperty(value = "한줄 코멘트")
         private String comment; // TODO 글자수 제한
+
     }
 
     @Getter @Setter

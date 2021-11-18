@@ -1,5 +1,6 @@
 package com.heardot.domain.dot;
 
+import com.heardot.api.dot.dto.CreateDotDto;
 import com.heardot.domain.BaseEntity;
 import com.heardot.domain.member.Member;
 import com.heardot.domain.music.Music;
@@ -19,29 +20,32 @@ public class Dot extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long dotId;
 
+    @Column(nullable = false)
     private String regionNickname;
 
     private String comment;
 
+    @Column(nullable = false)
     private String latitude; //위도
 
+    @Column(nullable = false)
     private String longitude; //경도
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "music_id")
     private Music music;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Dot(String latitude, String longitude, String regionNickname, String comment,
-               String musicUrl, String musicName, String siteType, String albumArt, Member member) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.regionNickname = regionNickname;
-        this.comment = comment;
+    public Dot(CreateDotDto.Request request, Member member) {
+        this.latitude = request.getLatitude();
+        this.longitude = request.getLongitude();
+        this.regionNickname = request.getRegionNickname();
+        this.comment = request.getComment();
         this.member = member;
-        this.music = Music.builder().musicName(musicName).musicUrl(musicUrl).siteType(siteType).albumArt(albumArt).build();
+        this.music = Music.builder().musicName(request.getMusicName()).musicUrl(request.getMusicUrl()).siteType(request.getSiteType()).albumArt(request.getAlbumArt()).build();
         connMemberDot(member);
     }
 

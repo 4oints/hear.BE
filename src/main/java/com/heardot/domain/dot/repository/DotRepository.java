@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface DotRepository extends JpaRepository<Dot, Long> {
 
     @EntityGraph(attributePaths = "member")
-    Optional<Dot> findWithMemberById(Long dotId);
+    Optional<Dot> findWithMemberByDotId(Long dotId);
 
     @EntityGraph(attributePaths = {"member","music"})
-    Optional<Dot> findWithMemberMusicById(Long dotId);
+    Optional<Dot> findWithMemberMusicByDotId(Long dotId);
 }

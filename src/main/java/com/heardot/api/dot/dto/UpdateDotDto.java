@@ -13,23 +13,16 @@ public class UpdateDotDto {
         @ApiModelProperty(value = "업데이트 요청하는 닷 id")
         private Long dotId;
 
-        @ApiModelProperty(value = "음악 url")
-        private String musicUrl;
-
-        @ApiModelProperty(value = "음악 이름")
-        private String musicName;
-
-        @ApiModelProperty(value = "음악 앨범 사진")
-        private String albumArt;
-
-        @ApiModelProperty(value = "음악 사이트 타입 (YOUTUBE)")
-        private String siteType;
-
         @ApiModelProperty(value = "위치 별명")
         private String regionNickname;
 
         @ApiModelProperty(value = "한줄 코멘트")
         private String comment;
+
+        public Request(String regionNickname, String comment) {
+            this.regionNickname = regionNickname;
+            this.comment = comment;
+        }
     }
 
     @Getter @Setter
