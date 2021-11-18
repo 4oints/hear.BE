@@ -2,14 +2,8 @@ name: Slack alert for develop branch
 
 on:
   push:
-    branches:
-      - develop
-
-  pull_request:
-    branches:
-      - develop
-      - main
-
+    branches: [ main ]
+    
 jobs:
   build:
 
@@ -27,7 +21,7 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          author_name: Sloth Backend - dev
+          author_name: heardot Backend - dev
           fields: repo,commit,message,author # action,eventName,ref,workflow,job,took 추가할 수 있음
           mention: here
           if_mention: failure,cancelled
