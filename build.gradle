@@ -18,6 +18,12 @@ configurations {
     }
 }
 
+bootJar{
+    archivesBaseName = 'heardot'
+    archiveFileName = 'heardot.jar'
+    archiveVersion = "0.0.1"
+}
+
 ext{
     springCloudVersion = '2020.0.3'
 }
