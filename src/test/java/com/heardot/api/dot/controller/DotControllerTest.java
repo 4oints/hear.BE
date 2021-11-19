@@ -67,7 +67,7 @@ class DotControllerTest extends BaseApiController {
         assertEquals(testEmail,savedDot.getMember().getEmail());
     }
 
-    @Test
+    /*@Test
     @DisplayName("DOT 정보 변경")
     void update_dot_success() throws Exception {
         // given
@@ -83,5 +83,5 @@ class DotControllerTest extends BaseApiController {
                 .andExpect(status().isOk())
                 .andReturn();
 
-    }
+    }*/
 }
