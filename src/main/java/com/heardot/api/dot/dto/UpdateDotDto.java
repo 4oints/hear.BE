@@ -8,6 +8,7 @@ public class UpdateDotDto {
 
     @Getter @Setter
     @ApiModel(value = "Dot 업데이트 요청 객체", description = "Dot 업데이트 요청 객체")
+    @AllArgsConstructor @NoArgsConstructor
     public static class Request {
 
         @ApiModelProperty(value = "업데이트 요청하는 닷 id")
