@@ -19,14 +19,14 @@ else
   if [ ${IDLE_PORT} -eq 8081 ]
   then
         echo "8081 포트 애플리케이션 중단"
-        $(sudo docker stop "spring-template-real1")
+        $(sudo docker stop "heardot-real1") # 이름 수정
   else
         echo "8082 포트 애플리케이션 중단"
-        $(sudo docker stop "spring-template-real2")
+        $(sudo docker stop "heardot-real2") # 이름 수정
   fi
 
   # 도커 이미지 pull
-  sudo docker pull ehdqls4013/heardot
+  sudo docker pull ehdqls4013/heardot # 도커 이미지 경로 수정
 
   #미사용 도커 이미지 삭제
   sudo docker image prune -f
