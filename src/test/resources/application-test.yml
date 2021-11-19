@@ -1,16 +1,15 @@
 spring:
   #아래 내용이 없어도 스프링부트에서 테스트돌릴 때 기본적으로 메모리 모드로 돌림
-  #datasource:
-  #  url: jdbc:h2:mem:test
-  #  username: sa
-  #  password:
-  #  driver-class-name: org.h2.Driver
-
   datasource:
-    url: ENC(R1B68gl6JpFz1Ni2qOmneS6UzvtXPCh99EDgG5q9A6osIiOcIKvNUa656dJk/3AQ1Gv8+yw/2/wCG5hj8Osgfg==)
-    username: ENC(58g4l7Vl04X2ManldaEe+JMa9aeQN68XpEyYMgUVcNI=)
-    password: ENC(ZeEixrO88uEbVBfbi2/Unykmbj51D3CAUWMcnfrD13s=)
-    driver-class-name: org.postgresql.Driver
+    platform: h2
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  h2:
+    console:
+      enabled: true
 
   session:
     jdbc:
@@ -18,28 +17,27 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         format_sql : true
-        default_batch_fetch_size: 1000
-        use_sql_comments: true
-        open-in-view: false
-
+        default_batch_fetch_size: 100
+  #    open-in-view: false
   devtools:
     livereload:
       enabled: true
     restart:
       enabled: true
 
+  thymeleaf:
+    enabled: true
+    encoding: UTF-8
+
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
 
-  h2:
-    console:
-      enabled: true
 
   messages:
     basename: messages,errors
@@ -70,6 +68,7 @@ token:
   secret: heardot-backend
   access-token-expiration-time: 900000  # 15분
   refresh-token-expiration-time: 1210500000 # 2주
+
 
 my-pass: heardot*
 

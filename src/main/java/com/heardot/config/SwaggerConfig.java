@@ -23,15 +23,15 @@ public class SwaggerConfig {
     @Bean
     public Docket commonApi() {
         Server serverLocal = new Server("local", "http://localhost:8080", "for local usages", Collections.emptyList(), Collections.emptyList());
-        //Server testServer = new Server("test", "https://slothbackend.hopto.org", "for testing", Collections.emptyList(), Collections.emptyList());
+        Server testServer = new Server("test server", "https://heardotofficial.hopto.org", "for testing", Collections.emptyList(), Collections.emptyList());
         return new Docket(DocumentationType.OAS_30)
                 .ignoredParameterTypes(Member.class)
                 .ignoredParameterTypes(Errors.class)
                 .ignoredParameterTypes(Member.class)
                 .ignoredParameterTypes(Errors.class)
                 .ignoredParameterTypes(BindingResult.class)
-                .servers(serverLocal)
-                //.servers(serverLocal, testServer)
+                //.servers(serverLocal)
+                .servers(serverLocal, testServer)
                 .groupName("heardot")
                 .apiInfo(this.apiInfo())
                 .select()
