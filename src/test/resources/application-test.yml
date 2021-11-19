@@ -1,6 +1,7 @@
 spring:
   #아래 내용이 없어도 스프링부트에서 테스트돌릴 때 기본적으로 메모리 모드로 돌림
   datasource:
+    platform: h2
     url: jdbc:h2:mem:test
     username: sa
     password:
@@ -40,12 +41,6 @@ spring:
 
   messages:
     basename: messages,errors
-  sql:
-    init:
-      mode: always
-      schema-locations: classpath:schema.sql
-      platform: h2
-      data-locations: classpath:data.sql
 
 logging:
   level:
@@ -55,8 +50,6 @@ logging:
 
 server:
   servlet:
-    encoding:
-      force-response: true # 에러 메세지 한글 인코딩
     context-path: /
   error:
     include-stacktrace: never
@@ -73,8 +66,8 @@ jasypt:
 
 token:
   secret: heardot-backend
-  access-token-expiration-time: 9999999999999
-  refresh-token-expiration-time: 9999999999999
+  access-token-expiration-time: 900000  # 15분
+  refresh-token-expiration-time: 1210500000 # 2주
 
 
 my-pass: heardot*
