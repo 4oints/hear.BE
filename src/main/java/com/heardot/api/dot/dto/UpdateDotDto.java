@@ -20,10 +20,6 @@ public class UpdateDotDto {
         @ApiModelProperty(value = "한줄 코멘트")
         private String comment;
 
-        public Request(String regionNickname, String comment) {
-            this.regionNickname = regionNickname;
-            this.comment = comment;
-        }
     }
 
     @Getter @Setter
