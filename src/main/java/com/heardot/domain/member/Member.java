@@ -2,10 +2,10 @@ package com.heardot.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.heardot.config.auth.dto.OAuthAttributes;
+import com.heardot.domain.dot.Dot;
 import com.heardot.domain.member.constant.Role;
 import com.heardot.domain.member.constant.SocialType;
 import com.heardot.domain.memberToken.MemberToken;
-import com.heardot.domain.posting.Posting;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -19,7 +19,7 @@ import java.util.List;
 @Table(name = "member")
 @Getter
 @Builder
-@ToString(exclude = {"memberToken","postings"})
+@ToString(exclude = {"memberToken","dots"})
 @AllArgsConstructor @NoArgsConstructor
 @SQLDelete(sql = "UPDATE member SET is_delete = true WHERE member_id=?")
 @Where(clause = "is_delete=false")
@@ -56,7 +56,7 @@ public class Member {
     private MemberToken memberToken;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Posting> postings;
+    private List<Dot> dots;
 
     @JsonIgnore
     public String getRoleKey() {
@@ -73,7 +73,7 @@ public class Member {
                 .email(oAuthAttributes.getEmail())
                 .socialType(oAuthAttributes.getSocialType())
                 .password(oAuthAttributes.getPassword())
-                .postings(new ArrayList<>())
+                .dots(new ArrayList<>())
                 .role(Role.USER)
                 .build();
     }

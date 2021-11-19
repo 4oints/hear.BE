@@ -118,9 +118,9 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(FeignClientException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ResponseEntity<ErrorMessage> memberNotFoundExceptionHandle(FeignClientException e, HttpServletRequest request) {
-        return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ErrorMessage> feignClientExceptionHandle(FeignClientException e, HttpServletRequest request) {
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, request.getRequestURI());
     }
 
     @ExceptionHandler(InvalidParameterException.class)

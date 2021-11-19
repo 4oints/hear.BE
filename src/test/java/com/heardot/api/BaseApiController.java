@@ -2,7 +2,10 @@ package com.heardot.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.heardot.config.auth.TokenProvider;
+import com.heardot.resolver.CurrentMember;
+import com.heardot.resolver.CurrentMemberArgumentResolver;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -28,6 +31,9 @@ public class BaseApiController {
 
     @Autowired
     protected TokenProvider tokenProvider;
+
+    @Autowired
+    protected CurrentMemberArgumentResolver currentMemberArgumentResolver;
 
     protected String accessToken;
 
