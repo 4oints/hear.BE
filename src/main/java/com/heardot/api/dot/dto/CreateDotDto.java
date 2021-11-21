@@ -20,6 +20,9 @@ public class CreateDotDto {
         @ApiModelProperty(value = "음악 이름")
         private String musicName;
 
+        @ApiModelProperty(value = "아티스트")
+        private String artist;
+
         @ApiModelProperty(value = "음악 앨범 사진")
         private String albumArt;
 

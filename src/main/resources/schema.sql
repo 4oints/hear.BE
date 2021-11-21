@@ -53,6 +53,7 @@ create table music (
                        modified_by varchar(255),
                        album_art clob not null,
                        music_name varchar(255) not null,
+                       artist varchar(255) not null,
                        music_url varchar(255) not null,
                        site_type varchar(255) not null,
                        primary key (music_id)
