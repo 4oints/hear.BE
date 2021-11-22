@@ -25,6 +25,9 @@ public class Music extends BaseEntity {
     @Column(nullable = false)
     private String musicUrl;
 
+    @Column(nullable = false)
+    private String artist;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SiteType siteType;
@@ -37,18 +40,12 @@ public class Music extends BaseEntity {
     private Dot dot;
 
     @Builder
-    public Music(String musicName, String musicUrl, String siteType, String albumArt) {
+    public Music(String musicName, String musicUrl, String artist, String siteType, String albumArt) {
         this.musicName = musicName;
         this.musicUrl = musicUrl;
         this.siteType = SiteType.from(siteType);
         this.albumArt = albumArt;
+        this.artist = artist;
     }
 
-
-    public void update(String musicName, String musicUrl, String siteType, String albumArt) {
-        this.musicUrl = musicUrl;
-        this.musicName = musicName;
-        this.siteType = SiteType.from(siteType);
-        this.albumArt = albumArt;
-    }
 }

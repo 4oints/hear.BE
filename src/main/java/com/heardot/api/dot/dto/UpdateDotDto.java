@@ -19,7 +19,6 @@ public class UpdateDotDto {
 
         @ApiModelProperty(value = "한줄 코멘트")
         private String comment;
-
     }
 
     @Getter @Setter
