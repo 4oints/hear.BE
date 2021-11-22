@@ -64,7 +64,6 @@ class DotControllerTest extends BaseApiController {
 
         // then
         assertNotNull(savedDot);
-        assertEquals(testEmail,savedDot.getMember().getEmail());
     }
 
     /*@Test
