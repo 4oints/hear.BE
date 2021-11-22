@@ -45,7 +45,8 @@ public class Dot extends BaseEntity {
         this.regionNickname = request.getRegionNickname();
         this.comment = request.getComment();
         this.member = member;
-        this.music = Music.builder().musicName(request.getMusicName()).musicUrl(request.getMusicUrl()).siteType(request.getSiteType()).albumArt(request.getAlbumArt()).build();
+        this.music = Music.builder().musicName(request.getMusicName()).musicUrl(request.getMusicUrl()).artist(request.getArtist())
+                .siteType(request.getSiteType()).albumArt(request.getAlbumArt()).build();
         connMemberDot(member);
     }
 
@@ -54,8 +55,8 @@ public class Dot extends BaseEntity {
         member.getDots().add(this);
     }
 
-    public boolean isOwner(Member member) {
-        return this.member.equals(member);
+    public Boolean isOwner(Long memberId) {
+        return this.member.getMemberId().equals(memberId);
     }
 
     public void updateComment(String comment) {

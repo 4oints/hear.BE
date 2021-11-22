@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -30,7 +31,8 @@ public class DotService {
     }
 
     public Long update(Member member, UpdateDotDto.Request request) {
-        Dot foundDot = checkOwner(member, request.getDotId());
+        Dot foundDot = findById(request.getDotId());
+        checkOwner(member.getMemberId(), foundDot);
         if (StringUtils.isNotEmpty(request.getComment())) {
             foundDot.updateComment(request.getComment());
         }
@@ -40,23 +42,44 @@ public class DotService {
         return foundDot.getDotId();
     }
 
-    private Dot checkOwner(Member member, Long dotId) {
-        Dot dot = findWithMemberById(dotId);
-        if (!dot.isOwner(member)) {
-            throw new ForbiddenException("해당 닷에 대한 병견 권한이 없습니다.");
+    public Dot getDotWithMusic(Member member, Long dotId) {
+        Dot foundDot = findWithMemberMusicById(dotId);
+        checkOwnerWithMusic(member.getMemberId(), foundDot);
+        return foundDot;
+    }
+
+    private void checkOwner(Long memberId, Dot dot) {
+        if (!dot.isOwner(memberId)) {
+            throw new ForbiddenException("해당 닷에 대한 변경 권한이 없습니다.");
         }
-        return dot;
+    }
+
+    private void checkOwnerWithMusic(Long memberId, Dot dot) {
+        if (!dot.isOwner(memberId)) {
+            throw new ForbiddenException("해당 닷에 대한 변경 권한이 없습니다.");
+        }
     }
 
     public Dot findById(Long dotId) {
         return dotRepository.findById(dotId).orElseThrow(() -> new EntityNotFoundException(dotId));
     }
 
-    public Dot findWithMemberById(Long dotId) {
-        return dotRepository.findWithMemberByDotId(dotId).orElseThrow(() -> new EntityNotFoundException(dotId));
-    }
-
     public Dot findWithMemberMusicById(Long dotId) {
         return dotRepository.findWithMemberMusicByDotId(dotId).orElseThrow(() -> new EntityNotFoundException(dotId));
+    }
+
+
+    public void deleteDot(Member member, Long dotId) {
+        Dot foundDot = findById(dotId);
+        checkOwner(member.getMemberId(), foundDot);
+        dotRepository.delete(foundDot);
+    }
+
+    public List<Dot> getDotsByMonth(Member member, int month) {
+        return dotRepository.findDotsByMonth(member.getMemberId(), month);
+    }
+
+    public List<Dot> getDotsWithLocation(Member member) {
+        return dotRepository.findDots(member.getMemberId());
     }
 }
