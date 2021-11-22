@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 @RequiredArgsConstructor
 public enum SiteType {
-    YOUTUBE;
+    YOUTUBE, MELON, GENIE, FLO, VIBE, SPOTIFY, BUGS, ETC;
 
     @JsonCreator
     public static SiteType from(String type) {
@@ -21,7 +21,7 @@ public enum SiteType {
 
     public static boolean isSiteType(String type) {
         List<SiteType> collect = Arrays.stream(SiteType.values())
-                .filter(SiteType -> SiteType.name().equals(type))
+                .filter(SiteType -> SiteType.name().equals(type.toUpperCase()))
                 .collect(Collectors.toList());
 
         if(collect == null || collect.size() == 0) {

@@ -19,21 +19,21 @@ public class CustomDotRepositoryImpl implements CustomDotRepository{
     @Autowired JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<Dot> findDotsByMonth(Member member, int month) {
+    public List<Dot> findDotsByMonth(Long memberId, int month) {
         return jpaQueryFactory
                 .selectFrom(dot)
-                .leftJoin(dot.music, music).fetchJoin()
-                .where(dot.member.eq(member)
+                .innerJoin(dot.music, music).fetchJoin()
+                .where(dot.member.memberId.eq(memberId)
                         .and(dot.regTime.month().eq(month)))
                 .fetch();
     }
 
     @Override
-    public List<Dot> findDots(Member member) {
+    public List<Dot> findDots(Long memberId) {
         return jpaQueryFactory
                 .selectFrom(dot)
-                .leftJoin(dot.music, music).fetchJoin()
-                .where(dot.member.eq(member))
+                .innerJoin(dot.music, music).fetchJoin()
+                .where(dot.member.memberId.eq(memberId))
                 .fetch();
     }
 

@@ -55,8 +55,8 @@ public class Dot extends BaseEntity {
         member.getDots().add(this);
     }
 
-    public boolean isOwner(Member member) {
-        return this.member.equals(member);
+    public Boolean isOwner(Long memberId) {
+        return this.member.getMemberId().equals(memberId);
     }
 
     public void updateComment(String comment) {

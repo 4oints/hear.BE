@@ -40,7 +40,7 @@ class DotControllerTest extends BaseApiController {
     void create_dot() throws Exception { // TODO 쿼리 확인하고 시간 줄이기
 
         //given
-        CreateDotDto.Request request = new CreateDotDto.Request("https://www.test", "test", "test", "YOUTUBE",
+        CreateDotDto.Request request = new CreateDotDto.Request("https://www.test", "test", "test","test", "YOUTUBE",
                 "2000", "1000","test장소",null);
 
         //when
@@ -60,7 +60,7 @@ class DotControllerTest extends BaseApiController {
         given(dotRepository.save(new Dot(request, member)))
                 .willReturn(dotRepository.save(new Dot(request, member)));*/
 
-        Dot savedDot = dotRepository.findWithMemberByDotId(response.getDotId()).orElseThrow(() -> new EntityNotFoundException(response.getDotId()));
+        Dot savedDot = dotRepository.findById(response.getDotId()).orElseThrow(() -> new EntityNotFoundException(response.getDotId()));
 
         // then
         assertNotNull(savedDot);

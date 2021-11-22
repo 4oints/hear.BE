@@ -26,7 +26,7 @@ public class CreateDotDto {
         @ApiModelProperty(value = "음악 앨범 사진")
         private String albumArt;
 
-        @ApiModelProperty(value = "음악 사이트 타입 (YOUTUBE)")
+        @ApiModelProperty(value = "음악 사이트 타입 (YOUTUBE, MELON, GENIE, FLO, VIBE, SPOTIFY, BUGS, ETC")
         private String siteType;
 
         @ApiModelProperty(value = "저장한 위도")

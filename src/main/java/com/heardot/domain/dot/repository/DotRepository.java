@@ -12,10 +12,7 @@ import java.util.Optional;
 @Repository
 public interface DotRepository extends JpaRepository<Dot, Long>, CustomDotRepository {
 
-    @EntityGraph(attributePaths = "member")
-    Optional<Dot> findWithMemberByDotId(Long dotId);
-
-    @EntityGraph(attributePaths = {"member","music"})
+    @EntityGraph(attributePaths = {"music"})
     Optional<Dot> findWithMemberMusicByDotId(Long dotId);
 
 }

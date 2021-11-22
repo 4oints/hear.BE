@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CustomDotRepository {
     
-    List<Dot> findDotsByMonth(Member member, int month);
+    List<Dot> findDotsByMonth(Long memberId, int month);
 
-    List<Dot> findDots(Member member);
+    List<Dot> findDots(Long memberId);
 }
