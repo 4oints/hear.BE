@@ -21,32 +21,37 @@ import java.util.List;
 public class PushService {
 
     private final ObjectMapper objectMapper;
+    private final PushFeignClient pushFeignClient;
 
     @Value("${project-id}")
     String PROJECT_ID;
 
-    @Value("${firebase-sdk-path")
+    @Value("${firebase-sdk-path}")
     String firebaseConfigPath;
 
     public void sendMessageTo(String targetToken, String memberName, Long dotCount) throws IOException {
 
-        String API_URL = "https://fcm.googleapis.com/v1/projects/" + PROJECT_ID + "/messages:send";
+        //String API_URL = "https://fcm.googleapis.com/v1/projects/" + PROJECT_ID + "/messages:send";
         String body = "현재 위치에서 발견된 DOT 갯수: " + String.valueOf(dotCount);
 
         String message = makeMessage(targetToken, memberName, body);
-        OkHttpClient client = new OkHttpClient();
-        RequestBody requestBody = RequestBody.create(message, MediaType.get("application/json; charset=utf-8"));
+        //OkHttpClient client = new OkHttpClient();
+        //RequestBody requestBody = RequestBody.create(message, MediaType.get("application/json; charset=utf-8"));
 
-        Request request = new Request.Builder()
+        String contentType = "application/json; UTF-8";
+        String response = pushFeignClient.FcmRequest(contentType, "Bearer " + getAccessToken(), message);
+        log.info("FCM response : " + response);
+
+        /*Request request = new Request.Builder()
                 .url(API_URL)
                 .post(requestBody)
                 .addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + getAccessToken()) // TODO Feign client 교체
                 .addHeader(HttpHeaders.CONTENT_TYPE, "application/json; UTF-8")
                 .build();
 
-        Response response = client.newCall(request).execute();
+        Response response = client.newCall(request).execute();*/
 
-        log.info(response.body().string());
+        //log.info(response.body().string());
     }
 
     private String makeMessage(String targetToken, String title, String body) throws JsonProcessingException {

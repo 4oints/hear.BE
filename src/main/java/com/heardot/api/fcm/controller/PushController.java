@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/push")
 public class PushController {
 
     private final PushService pushService;
@@ -34,7 +36,7 @@ public class PushController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    @PostMapping("/push")
+    @PostMapping("")
     public ResponseEntity<ApiResult> checkDotExist(@CurrentMember Member member, @RequestBody PushDto.Request request) throws IOException {
         Long dotCount = dotService.countDotByLocation(member, request);
         if (dotCount == 0) {
@@ -45,6 +47,8 @@ public class PushController {
             pushService.sendMessageTo(request.getTargetToken(), member.getMemberName(), dotCount);
             return ResponseEntity.ok(ApiResult.createOk());
         } catch (Exception e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
             throw new BusinessException("푸시 알림 처리 중 에러가 발생했습니다.");
         }
     }
@@ -53,7 +57,7 @@ public class PushController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue = "jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    @GetMapping("/push/click")
+    @GetMapping("/click")
     public ResponseEntity<List<PushClickDto.Response>> pushClick(@CurrentMember Member member, @RequestBody PushClickDto.Request request) {
         List<Dot> dots = dotService.getDotsByLocation(member, request);
         List<PushClickDto.Response> responses = new ArrayList<>();
