@@ -1,17 +1,12 @@
 package com.heardot.domain.dot.repository;
 
 import com.heardot.domain.dot.Dot;
-import com.heardot.domain.dot.QDot;
-import com.heardot.domain.member.Member;
-import com.heardot.domain.member.QMember;
-import com.heardot.domain.music.QMusic;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 import static com.heardot.domain.dot.QDot.dot;
-import static com.heardot.domain.member.QMember.member;
 import static com.heardot.domain.music.QMusic.music;
 
 public class CustomDotRepositoryImpl implements CustomDotRepository{
@@ -34,6 +29,24 @@ public class CustomDotRepositoryImpl implements CustomDotRepository{
                 .selectFrom(dot)
                 .innerJoin(dot.music, music).fetchJoin()
                 .where(dot.member.memberId.eq(memberId))
+                .fetch();
+    }
+
+    public Long countByLocation(Long memberId, String latitude, String longitude) {
+        return jpaQueryFactory.selectFrom(dot)
+                .where(dot.member.memberId.eq(memberId)
+                        .and(dot.latitude.eq(latitude))
+                        .and(dot.longitude.eq(longitude)))
+                .fetchCount();
+    }
+
+    @Override
+    public List<Dot> findWithMusicByLocation(Long memberId, String latitude, String longitude) {
+        return jpaQueryFactory.selectFrom(dot)
+                .innerJoin(dot.music, music).fetchJoin()
+                .where(dot.member.memberId.eq(memberId)
+                        .and(dot.latitude.eq(latitude))
+                        .and(dot.longitude.eq(longitude)))
                 .fetch();
     }
 
