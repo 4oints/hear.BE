@@ -16,8 +16,17 @@ public class FcmMessage {
     @AllArgsConstructor
     @Getter
     public static class Message {
+        private Data data;
         private Notification notification;
         private String token;
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class Data {
+        private String memberName;
+        private String dotCount;
     }
 
     @Builder

@@ -59,12 +59,10 @@ public class PushService {
                 .validate_only(false)
                 .message(FcmMessage.Message.builder()
                         .token(targetToken)
-                        .notification(FcmMessage.Notification.builder()
-                                .title(title)
-                                .body(body)
-                                .image(null)
-                                .build()
-                        ).build()
+                        .data(FcmMessage.Data.builder()
+                                .memberName(title)
+                                .dotCount(body)
+                                .build()).build()
                 ).build();
 
         return objectMapper.writeValueAsString(fcmMessage);
