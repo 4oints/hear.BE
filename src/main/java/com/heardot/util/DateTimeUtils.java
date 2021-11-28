@@ -19,7 +19,7 @@ public class DateTimeUtils {
     }
 
     public static String convertToString(LocalDate localDate) {
-        return localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd-EEE"));
     }
 
     public static LocalDate convertToDate(String dateString) {

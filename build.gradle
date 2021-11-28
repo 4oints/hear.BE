@@ -67,6 +67,10 @@ dependencies {
     //xss
     implementation group: 'com.navercorp.lucy', name: 'lucy-xss-servlet', version: '2.0.0'
 
+    //fcm
+    implementation group: 'com.google.firebase', name: 'firebase-admin', version: '8.1.0'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.2'
+
     compileOnly 'org.projectlombok:lombok'
     //database
     runtimeOnly 'com.h2database:h2'
