@@ -7,7 +7,7 @@ spring:
   #  driver-class-name: org.h2.Driver
 
   datasource:
-    url: ENC(R1B68gl6JpFz1Ni2qOmneS6UzvtXPCh99EDgG5q9A6osIiOcIKvNUa656dJk/3AQ1Gv8+yw/2/wCG5hj8Osgfg==)
+    url: ENC(NKZi7rJRYX4zLjQjjNTGzGT8KLpkYzI3hWlPRWe6Jh5M/MwKTXreUa/l9E+K4VcGwZK8kuJ9Dqg2lSEKUo7y7w==)
     username: ENC(58g4l7Vl04X2ManldaEe+JMa9aeQN68XpEyYMgUVcNI=)
     password: ENC(ZeEixrO88uEbVBfbi2/Unykmbj51D3CAUWMcnfrD13s=)
     driver-class-name: org.postgresql.Driver

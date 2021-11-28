@@ -1,6 +1,7 @@
 package com.heardot.api.fcm.dto;
 
 import com.heardot.domain.dot.Dot;
+import com.heardot.util.DateTimeUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -46,7 +47,7 @@ public class PushClickDto {
             return Response.builder()
                     .dotId(dot.getDotId())
                     .locationNickname(dot.getRegionNickname())
-                    .regTime(dot.getRegTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+                    .regTime(DateTimeUtils.convertToString(dot.getRegTime().toLocalDate()))
                     .comment(dot.getComment())
                     .artist(dot.getMusic().getArtist())
                     .musicName(dot.getMusic().getMusicName())
