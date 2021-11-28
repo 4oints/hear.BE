@@ -2,6 +2,8 @@ package com.heardot.api.dot.service;
 
 import com.heardot.api.dot.dto.CreateDotDto;
 import com.heardot.api.dot.dto.UpdateDotDto;
+import com.heardot.api.fcm.dto.PushClickDto;
+import com.heardot.api.fcm.dto.PushDto;
 import com.heardot.domain.dot.Dot;
 import com.heardot.domain.dot.repository.DotRepository;
 import com.heardot.domain.member.Member;
@@ -81,5 +83,13 @@ public class DotService {
 
     public List<Dot> getDotsWithLocation(Member member) {
         return dotRepository.findDots(member.getMemberId());
+    }
+
+    public Long countDotByLocation(Member member, PushDto.Request request) {
+        return dotRepository.countByLocation(member.getMemberId(), request.getLatitude(), request.getLongitude());
+    }
+
+    public List<Dot> getDotsByLocation(Member member, PushClickDto.Request request) {
+        return dotRepository.findWithMusicByLocation(member.getMemberId(), request.getLatitude(), request.getLongitude());
     }
 }

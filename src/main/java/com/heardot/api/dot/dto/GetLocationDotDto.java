@@ -22,6 +22,9 @@ public class GetLocationDotDto {
         @ApiModelProperty(value = "노래 제목")
         private String musicName;
 
+        @ApiModelProperty(value = "스트리밍 사이트")
+        private String siteType;
+
         @ApiModelProperty(value = "아티스트")
         private String artist;
 
@@ -37,6 +40,7 @@ public class GetLocationDotDto {
                     .albumArt(dot.getMusic().getAlbumArt())
                     .musicName(dot.getMusic().getMusicName())
                     .artist(dot.getMusic().getArtist())
+                    .siteType(dot.getMusic().getSiteType().name())
                     .latitude(dot.getLatitude())
                     .longitude(dot.getLongitude())
                     .build();
