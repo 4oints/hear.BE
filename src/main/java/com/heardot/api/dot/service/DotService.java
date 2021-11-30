@@ -89,7 +89,7 @@ public class DotService {
         return dotRepository.countByLocation(member.getMemberId(), request.getLatitude(), request.getLongitude());
     }
 
-    public List<Dot> getDotsByLocation(Member member, PushClickDto.Request request) {
-        return dotRepository.findWithMusicByLocation(member.getMemberId(), request.getLatitude(), request.getLongitude());
+    public List<Dot> getDotsByLocation(Member member, String latitude, String longitude) {
+        return dotRepository.findWithMusicByLocation(member.getMemberId(), latitude, longitude);
     }
 }
