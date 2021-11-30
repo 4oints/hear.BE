@@ -58,7 +58,7 @@ public class PushClickDto {
         }
     }
 
-    @Getter @Setter
+    /*@Getter @Setter
     @NoArgsConstructor @AllArgsConstructor
     @ApiModel(value = "푸시 클릭 요청 객체", description = "푸시 클릭 요청 객체")
     public static class Request {
@@ -68,5 +68,5 @@ public class PushClickDto {
 
         @ApiModelProperty(value = "경도")
         private String longitude;
-    }
+    }*/
 }

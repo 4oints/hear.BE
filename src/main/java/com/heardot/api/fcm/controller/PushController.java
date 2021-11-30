@@ -44,7 +44,7 @@ public class PushController {
             return ResponseEntity.ok(apiResult);
         }
         try {
-            pushService.sendMessageTo(request.getTargetToken(), member.getMemberName(), dotCount);
+            pushService.sendMessageTo(request, member.getMemberName());
             return ResponseEntity.ok(ApiResult.createOk());
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -53,13 +53,13 @@ public class PushController {
         }
     }
 
-    @Operation(summary = "저장된 닷 접근시 푸시 API", description = "저장된 닷 접근시 푸시 API")
+    @Operation(summary = "푸시 클릭 시 닷 조회 API", description = "푸시 클릭 시 닷 조회 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue = "jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     @GetMapping("/click")
-    public ResponseEntity<List<PushClickDto.Response>> pushClick(@CurrentMember Member member, @RequestBody PushClickDto.Request request) {
-        List<Dot> dots = dotService.getDotsByLocation(member, request);
+    public ResponseEntity<List<PushClickDto.Response>> pushClick(@CurrentMember Member member, @RequestParam(value = "latitude") String latitude, @RequestParam(value = "longitude") String longitude) {
+        List<Dot> dots = dotService.getDotsByLocation(member, latitude, longitude);
         List<PushClickDto.Response> responses = new ArrayList<>();
         for (Dot dot : dots) {
             responses.add(PushClickDto.Response.create(dot));
