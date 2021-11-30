@@ -26,7 +26,8 @@ public class FcmMessage {
     @Getter
     public static class Data {
         private String memberName;
-        private String dotCount;
+        private String latitude;
+        private String longitude;
     }
 
     @Builder
