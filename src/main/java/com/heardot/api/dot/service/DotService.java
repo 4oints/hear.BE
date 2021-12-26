@@ -32,8 +32,8 @@ public class DotService {
         return savedDot.getDotId();
     }
 
-    public Long update(Member member, UpdateDotDto.Request request) {
-        Dot foundDot = findById(request.getDotId());
+    public Long update(Member member, UpdateDotDto.Request request, Long dotId) {
+        Dot foundDot = findById(dotId);
         checkOwner(member.getMemberId(), foundDot);
         if (StringUtils.isNotEmpty(request.getComment())) {
             foundDot.updateComment(request.getComment());

@@ -57,9 +57,9 @@ public class DotController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    @PatchMapping(value = "")
-    public ResponseEntity<UpdateDotDto.Response> updateDot(@CurrentMember Member member, @RequestBody UpdateDotDto.Request request) {
-        Long updatedDotId = dotService.update(member, request);
+    @PatchMapping(value = "{dotId}")
+    public ResponseEntity<UpdateDotDto.Response> updateDot(@CurrentMember Member member, @RequestBody UpdateDotDto.Request request, @PathVariable Long dotId) {
+        Long updatedDotId = dotService.update(member, request, dotId);
         UpdateDotDto.Response response = UpdateDotDto.Response.create(updatedDotId);
         return ok(response);
     }
