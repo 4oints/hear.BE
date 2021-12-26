@@ -14,6 +14,7 @@ create table member (
                         password varchar(255) not null,
                         role varchar(255) not null,
                         social_type varchar(255) not null,
+                        profile_image_url varchar(255),
                         primary key (member_id)
 );
 

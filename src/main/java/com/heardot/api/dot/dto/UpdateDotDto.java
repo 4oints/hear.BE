@@ -11,9 +11,6 @@ public class UpdateDotDto {
     @AllArgsConstructor @NoArgsConstructor
     public static class Request {
 
-        @ApiModelProperty(value = "업데이트 요청하는 닷 id")
-        private Long dotId;
-
         @ApiModelProperty(value = "위치 별명")
         private String regionNickname;
 
