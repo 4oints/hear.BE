@@ -41,6 +41,8 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
+    private String profileImageUrl;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
@@ -67,15 +69,23 @@ public class Member {
         this.memberToken = memberToken;
     }
 
-    public static Member createOauthMember(OAuthAttributes oAuthAttributes) {
+    public static Member createOauthMember(OAuthAttributes oAuthAttributes, String defaultProfileImageUrl) {
         return Member.builder()
                 .memberName(oAuthAttributes.getName())
                 .email(oAuthAttributes.getEmail())
                 .socialType(oAuthAttributes.getSocialType())
                 .password(oAuthAttributes.getPassword())
+                .profileImageUrl(defaultProfileImageUrl)
                 .dots(new ArrayList<>())
                 .role(Role.USER)
                 .build();
     }
 
+    public void updateProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    public void updateMemberName(String memberName) {
+        this.memberName = memberName;
+    }
 }

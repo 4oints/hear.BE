@@ -45,12 +45,16 @@ public class LoginController {
             throw new InvalidParameterException("토큰값을 입력해주세요");
         }
 
+        if (StringUtils.isBlank(oauthRequestDto.getDefaultProfileImageUrl())) {
+            throw new InvalidParameterException("기본 프로필 이미지 url을 입력해주세요.");
+        }
+
         if(!SocialType.isSocialType(oauthRequestDto.getSocialType())) {
             throw new InvalidParameterException("잘못된 소셜 타입입니다. 'GOOGLE', 'KAKAO' 중에 입력해주세요");
         }
 
         SocialType socialType = SocialType.from(oauthRequestDto.getSocialType());
-        ResponseJwtTokenDto responseJwtTokenDto = loginService.login(accessToken, socialType);
+        ResponseJwtTokenDto responseJwtTokenDto = loginService.login(accessToken, socialType, oauthRequestDto.getDefaultProfileImageUrl());
 
         return ResponseEntity.ok(responseJwtTokenDto);
     }

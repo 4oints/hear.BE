@@ -28,9 +28,10 @@ public class LoginService {
      * OAuth 로그인
      * @param accessToken
      * @param socialType
+     * @param defaultProfileImageUrl
      * @return
      */
-    public ResponseJwtTokenDto login(String accessToken, SocialType socialType) {
+    public ResponseJwtTokenDto login(String accessToken, SocialType socialType, String defaultProfileImageUrl) {
 
         // 소셜 회원 정보 조회
         OAuthAttributes oAuthAttributes = getSocialUserInfo(accessToken, socialType);
@@ -39,7 +40,7 @@ public class LoginService {
         TokenDto tokenDto = tokenProvider.createTokenDto(oAuthAttributes.getEmail());
 
         // 회원가입
-        memberService.saveMember(oAuthAttributes, tokenDto);
+        memberService.saveMember(oAuthAttributes, tokenDto, defaultProfileImageUrl);
 
         return modelMapper.map(tokenDto, ResponseJwtTokenDto.class);
     }

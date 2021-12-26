@@ -1,5 +1,6 @@
 package com.heardot.domain.member.service;
 
+import com.heardot.api.member.dto.UpdateMemberDto;
 import com.heardot.config.auth.dto.OAuthAttributes;
 import com.heardot.config.auth.dto.TokenDto;
 import com.heardot.domain.member.Member;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -26,11 +28,11 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void saveMember(OAuthAttributes oAuthAttributes, TokenDto tokenDto) {
+    public void saveMember(OAuthAttributes oAuthAttributes, TokenDto tokenDto, String defaultProfileImageUrl) {
         Optional<Member> optionalMember = memberRepository.findByEmail(oAuthAttributes.getEmail());
 
         if(optionalMember.isEmpty()) {
-            Member member = Member.createOauthMember(oAuthAttributes);
+            Member member = Member.createOauthMember(oAuthAttributes, defaultProfileImageUrl);
             Member savedMember = memberRepository.save(member);
 
             //리프레시 토큰 저장
@@ -67,4 +69,13 @@ public class MemberService {
         }
     }
 
+    public Long update(Member member, UpdateMemberDto.Request request) {
+        if (!StringUtils.isEmptyOrWhitespace(request.getProfileImageUrl())) {
+            member.updateProfileImageUrl(request.getProfileImageUrl());
+        }
+        if (!StringUtils.isEmptyOrWhitespace(request.getMemberName())) {
+            member.updateMemberName(request.getMemberName());
+        }
+        return member.getMemberId();
+    }
 }

@@ -1,1 +1,1 @@
-insert into member values (1, 'email@email.com', 0, 'testMember', 'heardot*','USER','KAKAO');
+insert into member values (1, 'email@email.com', 0, 'testMember', 'heardot*','USER','KAKAO','http://blah');
