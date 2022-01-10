@@ -78,4 +78,8 @@ public class MemberService {
         }
         return member.getMemberId();
     }
+
+    public void setDefaultProfileImage(Member member, String defaultProfileImageUrl) {
+        member.setDefaultProfileImage(defaultProfileImageUrl);
+    }
 }
