@@ -41,8 +41,11 @@ public class DotController {
         if (StringUtils.isAnyBlank(request.getLatitude(), request.getLongitude(), request.getRegionNickname())) {
             throw new InvalidParameterException("장소 정보가 부족합니다.");
         }
-        if (StringUtils.isAnyBlank(request.getMusicUrl(), request.getAlbumArt(), request.getMusicName(), request.getArtist())) {
+        if (StringUtils.isAnyBlank(request.getMusicUrl(), request.getMusicName(), request.getArtist())) {
             throw new InvalidParameterException("노래 정보가 부족합니다.");
+        }
+        if (StringUtils.isBlank(request.getPictureId())) {
+            throw new InvalidParameterException("사진을 등록해주세요.");
         }
         if (!SiteType.isSiteType(request.getSiteType())) {
             throw new InvalidParameterException("지원하지 않는 사이트입니다.");

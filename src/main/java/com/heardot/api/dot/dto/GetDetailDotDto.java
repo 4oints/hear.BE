@@ -18,8 +18,8 @@ public class GetDetailDotDto {
     @ApiModel(value = "Dot 상세 정보 조회 반환 객체", description = "Dot 상세 정보 조회 반환 객체")
     public static class Response {
 
-        @ApiModelProperty(value = "앨범아트")
-        private String albumArt;
+        @ApiModelProperty(value = "사진 Id")
+        private String pictureId;
 
         @ApiModelProperty(value = "노래 제목")
         private String musicName;
@@ -50,7 +50,7 @@ public class GetDetailDotDto {
 
         public static Response create(Dot dot) {
             return Response.builder()
-                    .albumArt(dot.getMusic().getAlbumArt())
+                    .pictureId(dot.getPictureId())
                     .musicName(dot.getMusic().getMusicName())
                     .musicUrl(dot.getMusic().getMusicUrl())
                     .artist(dot.getMusic().getArtist())

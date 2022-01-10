@@ -34,8 +34,8 @@ public class PushClickDto {
         @ApiModelProperty(value = "노래 제목")
         private String musicName;
 
-        @ApiModelProperty(value = "앨범 아트")
-        private String albumArt;
+        @ApiModelProperty(value = "사진 id")
+        private String pictureId;
 
         @ApiModelProperty(value = "노래 url")
         private String musicUrl;
@@ -51,7 +51,7 @@ public class PushClickDto {
                     .comment(dot.getComment())
                     .artist(dot.getMusic().getArtist())
                     .musicName(dot.getMusic().getMusicName())
-                    .albumArt(dot.getMusic().getAlbumArt())
+                    .pictureId(dot.getPictureId())
                     .musicUrl(dot.getMusic().getMusicUrl())
                     .qrCode(null) // TODO qr code 추가
                     .build();
