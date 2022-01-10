@@ -41,6 +41,7 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String profileImageUrl;
 
     @Enumerated(EnumType.STRING)
@@ -87,5 +88,9 @@ public class Member {
 
     public void updateMemberName(String memberName) {
         this.memberName = memberName;
+    }
+
+    public void setDefaultProfileImage(String defaultProfileImageUrl) {
+        this.profileImageUrl = defaultProfileImageUrl;
     }
 }

@@ -1,6 +1,8 @@
 package com.heardot.api.member.controller;
 
 import com.heardot.api.dot.dto.UpdateDotDto;
+import com.heardot.api.dto.ApiResult;
+import com.heardot.api.member.dto.DefaultProfileUrl;
 import com.heardot.api.member.dto.MemberInfoDto;
 import com.heardot.api.member.dto.UpdateMemberDto;
 import com.heardot.domain.member.Member;
@@ -39,5 +41,15 @@ public class MemberController {
     @GetMapping("")
     public ResponseEntity<MemberInfoDto.Response> getMemberInfo(@CurrentMember Member member) {
         return ResponseEntity.ok(MemberInfoDto.Response.create(member));
+    }
+
+    @Operation(summary = "기본 프로필 이미지로 변경 API", description = "기본 프로필 이미지로 변경 API")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue = "jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
+    @PatchMapping("/defaultProfileImage")
+    public ResponseEntity<ApiResult> setDefaultProfileImage(@RequestBody DefaultProfileUrl.Request request, @CurrentMember Member member) {
+        memberService.setDefaultProfileImage(member, request.getDefaultProfileImageUrl());
+        return ResponseEntity.ok(ApiResult.createOk());
     }
 }
