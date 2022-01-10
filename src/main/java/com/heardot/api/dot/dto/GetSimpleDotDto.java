@@ -22,8 +22,8 @@ public class GetSimpleDotDto {
         @ApiModelProperty(value = "닷 ID")
         private Long dotId;
 
-        @ApiModelProperty(value = "앨범아트")
-        private String albumArt;
+        @ApiModelProperty(value = "사진 id")
+        private String pictureId;
 
         @ApiModelProperty(value = "노래 제목")
         private String musicName;
@@ -40,7 +40,7 @@ public class GetSimpleDotDto {
         public static Response create(Dot dot) {
             return Response.builder()
                     .dotId(dot.getDotId())
-                    .albumArt(dot.getMusic().getAlbumArt())
+                    .pictureId(dot.getPictureId())
                     .musicName(dot.getMusic().getMusicName())
                     .siteType(dot.getMusic().getSiteType().name())
                     .artist(dot.getMusic().getArtist())

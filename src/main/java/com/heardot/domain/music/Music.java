@@ -32,19 +32,14 @@ public class Music extends BaseEntity {
     @Column(nullable = false)
     private SiteType siteType;
 
-    @Lob
-    @Column(nullable = false)
-    private String albumArt;
-
     @OneToOne(fetch = FetchType.LAZY , mappedBy = "music")
     private Dot dot;
 
     @Builder
-    public Music(String musicName, String musicUrl, String artist, String siteType, String albumArt) {
+    public Music(String musicName, String musicUrl, String artist, String siteType) {
         this.musicName = musicName;
         this.musicUrl = musicUrl;
         this.siteType = SiteType.from(siteType);
-        this.albumArt = albumArt;
         this.artist = artist;
     }
 

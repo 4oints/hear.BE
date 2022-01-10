@@ -31,6 +31,9 @@ public class Dot extends BaseEntity {
     @Column(nullable = false)
     private String longitude; //경도
 
+    @Column(nullable = false)
+    private String pictureId;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "music_id")
     private Music music;
@@ -45,8 +48,9 @@ public class Dot extends BaseEntity {
         this.regionNickname = request.getRegionNickname();
         this.comment = request.getComment();
         this.member = member;
+        this.pictureId = request.getPictureId();
         this.music = Music.builder().musicName(request.getMusicName()).musicUrl(request.getMusicUrl()).artist(request.getArtist())
-                .siteType(request.getSiteType()).albumArt(request.getAlbumArt()).build();
+                .siteType(request.getSiteType()).build();
         connMemberDot(member);
     }
 
