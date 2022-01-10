@@ -47,7 +47,7 @@ public class MemberController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue = "jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    @PatchMapping("")
+    @PatchMapping("/defaultProfileImage")
     public ResponseEntity<ApiResult> setDefaultProfileImage(@RequestBody DefaultProfileUrl.Request request, @CurrentMember Member member) {
         memberService.setDefaultProfileImage(member, request.getDefaultProfileImageUrl());
         return ResponseEntity.ok(ApiResult.createOk());
